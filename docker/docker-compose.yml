@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+    hacka_node:
+        build: ../server
+        ports:
+            - 80:8080
+        links:
+            - hacka_mysql
+
+    hacka_mysql:
+        build: ./mysql
+        volumes:
+            - hacka_db:/var/lib/mysql:rw
+        ports:
+            - 3306:3306
+        environment:
+            # On development progress, database server will has no password.
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+            # If needed, uncomment next line and append new appropriate password.
+            # MYSQL_ROOT_PASSWORD: SAMPLE
+volumes:
+    hacka_db:
