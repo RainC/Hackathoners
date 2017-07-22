@@ -1,29 +1,26 @@
-create database hacka_server_db;
-use hacka_server_db;
+CREATE DATABASE hacka_server_db;
+ALTER DATABASE hacka_server_db DEFAULT CHARACTER SET UTF8;
+USE hacka_server_db;
 
+CREATE TABLE 'Team' (
+    'id' int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    'name' varchar(30) DEFAULT NULL,
+    'members' varchar(20) DEFAULT NULL,
+    'repos' varchar(10) DEFAULT NULL
+) ENGINE=InnoDB;
 
--- CREATE TABLE `Code` (
--- `_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
--- `category` varchar(2) DEFAULT NULL,
--- `name` varchar(30) DEFAULT NULL,
--- `code` int(2) DEFAULT NULL,
--- PRIMARY KEY (`_id`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE 'Member' (
+    'id' int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    'name' varchar(30) DEFAULT NULL,
+    'phone' varchar(11) DEFAULT NULL,
+    'email' varchar(40) DEFAULT NULL,
+    'github' varchar(40) DEFAULT NULL,
+    'group' varchar(40) DEFAULT NULL
+) ENGINE=InnoDB;
 
--- CREATE TABLE `Family` (
--- `_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
--- `name` varchar(10) DEFAULT NULL,
--- `register_time` timestamp NULL DEFAULT NULL,
--- PRIMARY KEY (`_id`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- CREATE TABLE `Robot` (
--- `_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
--- `mac` varchar(17) DEFAULT NULL,
--- `status` varchar(2) DEFAULT NULL,
--- `family_id` int(11) DEFAULT NULL,
--- `type` varchar(2) DEFAULT NULL,
--- `ship_date` date DEFAULT NULL,
--- `register_time` timestamp NULL DEFAULT NULL,
--- PRIMARY KEY (`_id`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE 'Repository' (
+    'id' int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    'username' varchar(40) DEFAULT NULL,
+    'reponame' varchar(40) DEFAULT NULL,
+    'commits' int(3) DEFAULT NULL
+) ENGINE=InnoDB;
