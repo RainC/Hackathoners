@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+var hackathoners = require('../hackathoners');
+var models = hackathoners.db.model;
+
 /**
- * For checking server status.
+ * 서버 상태를 확인합니다.
  */
 router.get('/', function(req, res, next) {
   res.json({
@@ -12,9 +15,12 @@ router.get('/', function(req, res, next) {
   });
 });
 
+<<<<<<< HEAD
 /**
  * 멤버를 추가합니다.
  */
+=======
+>>>>>>> db071c3566d55df63fcd5f246607e1150af4afd6
 router.post('/member/add', function(req, res, next) {
   // 먼저 중복 검사를 수행합니다.
   models.Members.findOne({ where: {email: req.body.email} }).then(result => {
