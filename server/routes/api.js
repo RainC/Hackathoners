@@ -15,6 +15,9 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/**
+ * 멤버를 추가합니다.
+ */
 router.post('/member/add', function(req, res, next) {
   // 먼저 중복 검사를 수행합니다.
   models.Members.findOne({ where: {email: req.body.email} }).then(result => {
