@@ -4,12 +4,15 @@ var notices = [
     { content: 'C', type: 'broadcast', time: '5' }
 ];
 
+var state = 0; // 0 none // 1 progress
+
 function enqueue(content, type, time) {
     var obj = {content: content, type: type, time: time};
+    
     if (type === 'broadcast') notices.unshift(obj);
     else notices.push(obj)
-    
-    if (notices.length == 1) doTask();
+
+    if (notices.length === 1 && state === 0) doTask();
 }
 
 function dequeue() {
@@ -19,11 +22,13 @@ function dequeue() {
 }
 
 function doTask() {
-    // clear
+    state = 0;
     if (notices.length == 0) return ;
+
     setTimeout("doTask()", 5000);
     var obj = dequeue();
-    // action
+    state = 1;
+    drawFire();
 }
 
 doTask();
