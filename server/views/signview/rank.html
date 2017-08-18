@@ -47,6 +47,21 @@
         <!-- rank - 1 -->
         <div class="box"><a>LecRec</a></div>
         <div class="box"><a>총 35회, CPH 5회</a></div>
+        <!-- rank - 2 -->
+        <div class="box"><a>국민택시</a></div>
+        <div class="box"><a>총 28회, CPH 4회</a></div>
+        <!-- rank - 3 -->
+        <div class="box"><a>국고나라 사기꾼</a></div>
+        <div class="box"><a>총 25회, CPH 3회</a></div>
+        <!-- rank - 4 -->
+        <div class="box"><a>돌려방</a></div>
+        <div class="box"><a>총 22회, CPH 3회</a></div>
+        <!-- rank - 5 -->
+        <div class="box"><a>WorkHard</a></div>
+        <div class="box"><a>총 16회, CPH 2회</a></div>
+        <!-- rank - 6 -->
+        <div class="box"><a>TDD Hub</a></div>
+        <div class="box"><a>총 10회, CPH 4회</a></div>
 
 
     </div>
@@ -55,14 +70,30 @@
 
 <script>
 var img_date_left = 0;
-
+var rank123_tab = 0.02;
+var rank456_tab = 0.016;
 // hor 가로, ver 세로
 var div_box_ltwh = [
     // 미니 타이머
-    [0.7247, 0.0422, 0.2500, 0.0288, 'hor'],
+    [0.7247, 0.0422, 0.2450, 0.0288, 'hor'],
     // 1 등
-    [0.1609, 0.3118, 0.2367, 0.0705, 'ver-align-hor'],
-    [0.1609, 0.4118, 0.2367, 0.0305, 'ver-align-hor'],
+    [0.1609, 0.2653 + rank123_tab, 0.2367, 0.0705, 'ver-align-hor'],
+    [0.1609, 0.3653 + rank123_tab, 0.2367, 0.0305, 'ver-align-hor'],
+    // 2 등
+    [0.3820, 0.3906 + rank123_tab, 0.2594, 0.0705, 'ver-align-hor'],
+    [0.3820, 0.4906 + rank123_tab, 0.2594, 0.0305, 'ver-align-hor'],
+    // 3 등
+    [0.6047, 0.2988 + rank123_tab, 0.3125, 0.0705, 'ver-align-hor'],
+    [0.6047, 0.3988 + rank123_tab, 0.3125, 0.0305, 'ver-align-hor'],
+    // 4 등
+    [0.2195, 0.7294 + rank456_tab, 0.3125, 0.0305, 'ver'],
+    [0.2195, 0.7694 + rank456_tab, 0.3125, 0.0305, 'ver'],
+    // 5 등
+    [0.4680, 0.7294 + rank456_tab, 0.3125, 0.0305, 'ver'],
+    [0.4680, 0.7694 + rank456_tab, 0.3125, 0.0305, 'ver'],
+    // 6 등
+    [0.7000, 0.7294 + rank456_tab, 0.3125, 0.0305, 'ver'],
+    [0.7000, 0.7694 + rank456_tab, 0.3125, 0.0305, 'ver'],
 ];
 
 function init() {
