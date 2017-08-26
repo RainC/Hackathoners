@@ -89,7 +89,7 @@ function printScheduleSequence() {
         var tmpContent;
         var maxLengthContent = 12;
 
-        for(var i=0; i < 3; i++) {
+        for (var i = 0; i < arraySchedule.length; i++) {
             tmpTimeStart = new Date(addHours(STARTDATE, arraySchedule[i].start));
             tmpTimeEnd = new Date(addHours(STARTDATE, arraySchedule[i].end));
             tmpContent = arraySchedule[i].content;

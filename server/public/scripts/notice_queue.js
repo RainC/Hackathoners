@@ -1,7 +1,10 @@
 var notices = [
+    /* Test Data */
+    /*
     { content: 'A', type: 'commit', time: '5' },
     { content: 'B', type: 'pullrequest', time: '5' },
     { content: 'C', type: 'broadcast', time: '5' }
+    */
 ];
 
 var state = 0; // 0 none // 1 progress
