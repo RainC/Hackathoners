@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
+  <title>오픈소스 해커톤</title>
 
   <!-- bootstrap css -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,9 +12,13 @@
   <link rel='stylesheet' href='stylesheets/config.css' />
   <link rel='stylesheet' href='stylesheets/index.css' />
 
+  <!-- js -->
+  <script src="scripts/canvas.js"></script>
+  <script src="scripts/notice_queue.js"></script>
+
 </head>
 <body>
-
+  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
     <!--Contents -->
@@ -42,7 +46,7 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
+  <canvas id = "canvas"></canvas>
 </body>
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>

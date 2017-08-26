@@ -1,8 +1,15 @@
 
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
+var canvas;
+var context;
 
-window.addEventListener('resize', resizeCanvas, false);
+$(function() {
+    canvas = document.getElementById('canvas');
+    context = canvas.getContext('2d');
+
+    window.addEventListener('resize', resizeCanvas, false);
+    resizeCanvas();
+    doTask();
+});
 
 var fires = [];
 
@@ -24,8 +31,8 @@ function initFire() {
 }
 
 function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
 
 function drawStuff() {
@@ -33,9 +40,10 @@ function drawStuff() {
     var w = canvas.width;
     var h = canvas.height;
 
-    context.fillStyle = "black";
+    
     context.clearRect(0, 0, w, h);
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    //context.fillStyle = "black";
+    //context.fillRect(0, 0, canvas.width, canvas.height);
     context.globalCompositeOperation="lighter";
     for (var i = 0; i < 100; i++) {
         if (fires[i].r < 0) continue ;
@@ -62,9 +70,6 @@ function drawStuff() {
         }*/
     }
 }
-
-resizeCanvas();
-
 
 var timerFire; 
 function drawFire() {
