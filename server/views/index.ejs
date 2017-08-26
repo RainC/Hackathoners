@@ -53,11 +53,16 @@
 <script>
 
   var socket = io();
+  /*
   socket.on('new_commit', function(data) {
-      console.log(data);
+    console.log(data);
   });
 
-  var ip = "127.0.0.1";
+  socket.on('broadcast', function(data) {
+    enqueue('content', 'type', 'time');
+  });
+*/
+  var ip = "172.19.0.1";
   var port = "80"
   var addr = "http://" + ip + ":" + port;
 
@@ -71,6 +76,10 @@
     interval: 10000,
     pause: "false"
   });
+
+  function checkRank() {
+    socket.emit('rank');
+  }
 </script>
 
 </html>
