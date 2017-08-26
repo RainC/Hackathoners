@@ -4,12 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var hackathoners = require('./hackathoners');
+
+var app = express();
 
 var index = require('./routes/index');
 var api = require('./routes/api');
 var webhook = require('./routes/webhook');
-
-var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

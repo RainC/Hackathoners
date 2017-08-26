@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-
 var Hackathoners = {
     // 프로젝트 설정 집합
     config: {
@@ -12,7 +11,7 @@ var Hackathoners = {
             // 위의 사용자 이름에 대한 비밀번호입니다.
             password: "",
             // DB 서버의 주소입니다. (포트를 제외하고 입력합니다.)
-            host: "192.168.0.195",
+            host: "127.0.0.1",
             // 접속 대상 포트입니다. 기본값으로 3306번이 설정됩니다.
             port: "3306"
         }
@@ -27,6 +26,11 @@ var Hackathoners = {
             Members: undefined,
             Repositories: undefined
         }
+    },
+    // Socket.io 공유 객체 정의 집합
+    socket: {
+      io: undefined,
+      users: []
     }
 }
 
