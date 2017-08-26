@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+
+    @import url(https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        background: #B77DEF;
+    }
+
+    #wrapper {
+        margin: 0 auto;
+        width: 0;
+        height: 100%;
+        background: #B77DEF;
+    }
+
+    .box {
+        font-family:  'Spoqa Han Sans', 'Spoqa Han Sans KR', 'Sans-serif';
+        font-weight: 800;
+        position: absolute;
+        z-index: 2;
+    }
+
+    </style>
+</head>
+
+<body onload="init();">
+    <div id="wrapper">
+        <img
+            id="img_information"
+            src="./public/resources/information.png"
+            style="position: absolute; left: 0%; top: 0%; height: 100%; z-index: 2;">
+
+        <div class="box" style="font-weight: 500"><a>2017년 3월 19일 일요일_오후 04시 37분</a></div>
+        <div class="wrapper-md"></div>
+    </div>
+</body>
+
+
+<script>
+var img_date_left = 0;
+
+// hor 가로, ver 세로
+var div_box_ltwh = [
+    // 미니 타이머
+    [0.7247, 0.0422, 0.2450, 0.0288, 'hor'],
+
+];
+
+function init() {
+    var bodyWidth = $('body').width();
+    var bodyHeight = $('body').height();
+
+    var wrapHeight = $('#wrapper').height();
+    var wrapWidth = 1.505882352941176 * wrapHeight;
+
+    $('#wrapper').width(wrapWidth);
+
+    $("#img_information").css("left", (bodyWidth - wrapWidth)/2 + wrapWidth * img_date_left);
+
+    $( '.box' ).each(function ( i, box ) {
+        $( box ).css("left", (bodyWidth - wrapWidth)/2 + wrapWidth * div_box_ltwh[i][0]);
+        $( box ).css("top", wrapHeight * div_box_ltwh[i][1]);
+
+
+        var html = '<span style="white-space:nowrap"></span>',
+            line = $( box ).wrapInner( html ).children()[ 0 ],
+            n = 200;
+
+        if (div_box_ltwh[i][4] == 'hor') {
+            $( box ).css("width", wrapWidth * div_box_ltwh[i][2]);
+            var width = $( box ).width();
+
+            $( box ).css( 'font-size', n );
+
+            while ( $( line ).width() > width ) {
+                $( box ).css( 'font-size', --n );
+            }
+        } else {
+            $( box ).css("height", wrapWidth * div_box_ltwh[i][3]);
+            var height = $( box ).height();
+
+            $( box ).css( 'font-size', n );
+
+            while ( $( line ).height() > height ) {
+                $( box ).css( 'font-size', --n );
+            }
+        }
+        $( box ).text( $( line ).text() );
+    });
+}
+
+window.addEventListener('resize', function(event){
+    init();
+});
+
+</script>
+
+</html>
