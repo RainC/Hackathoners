@@ -54,10 +54,17 @@
 </body>
 
 <script>
-$('.carousel').carousel({
-  interval: 500,
-  pause: "false"
-})
+  $('.carousel').carousel({
+    interval: 500,
+    pause: "false"
+  });
+</script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script>
+  var socket = io();
+  socket.on('new_commit', function(data) {
+      console.log(data);
+  });
 </script>
 
 </html>

@@ -4,6 +4,7 @@ var router = express.Router();
 
 var hackathoners = require('../hackathoners');
 var models = hackathoners.db.model;
+var socket = hackathoners.socket;
 
 /**
  * 각 팀들의 Github Project에서 나오는 PushEvent Webhook을 처리합니다.
@@ -58,11 +59,10 @@ router.post('/', function(req, res, next) {
 
   request(options, function(error, response, body) {
     result.commit.full_count = JSON.parse(response.body).size;
-    /**
-     * 현재는 테스트 구현으로, 실제 구현에서는 이 부분에 socket.io를 통한
-     * Event Emit이 이루어질 예정입니다.
-     */
-    console.log(result);
+    socket.users.forEach(function(value, index, array) {
+      value.emit("new_commit", result);
+    }); 
+    res.status(200);
     res.json(result);
   });
 });
