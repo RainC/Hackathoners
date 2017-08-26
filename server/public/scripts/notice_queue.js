@@ -30,5 +30,3 @@ function doTask() {
     state = 1;
     drawFire();
 }
-
-doTask();

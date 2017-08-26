@@ -42,7 +42,6 @@ function checkNextSchedule() {
     var nextTime = schedule[currentScheduleIndex].end;
     if (now - STARTDATE > nextTime * 60 * 60 * 1000) {
         currentScheduleIndex++;
-        console.log(schedule.slice(currentScheduleIndex - 1, currentScheduleIndex + 2));
         return {result: true,
              listSchedule: schedule.slice(currentScheduleIndex - 1, currentScheduleIndex + 2)};
     }
