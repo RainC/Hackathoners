@@ -47,4 +47,66 @@ router.post('/member/add', function(req, res, next) {
   });
 });
 
+
+/**
+ * Repository를 추가합니다.
+ */
+router.post('/repo/add', function(req, res, next) {
+  // 먼저 중복 검사를 수행합니다.
+  models.Repositories.findOne({ where: {reponame: req.body.reponame} }).then(result => {
+    if (result) {
+      res.json({
+        result: 1,
+        error_desc: "이미 존재하는 Repository 이름입니다."
+      });
+    } else {
+      // 중복 검사를 통과했다면, 새로운 Member를 추가합니다.
+      models.Repositories.findOrCreate({
+        where: {
+          username: req.body.username,
+          reponame: req.body.reponame,
+          commits: req.body.commits || 0
+        }, 
+      }).spread((user, created) => {
+        console.log("[+] /repo/add : 새로운 Repository가 추가되었습니다 : \n", user.get({plain: true}));
+        res.json({
+          result: 0,
+          member: user.get({plain: true})
+        });
+      });
+    }
+  });
+});
+
+
+/**
+ * 팀을 추가합니다.
+ */
+router.post('/team/add', function(req, res, next) {
+  // 먼저 중복 검사를 수행합니다.
+  models.Teams.findOne({ where: {name: req.body.name} }).then(result => {
+    if (result) {
+      res.json({
+        result: 1,
+        error_desc: "이미 존재하는 팀 이름입니다."
+      });
+    } else {
+      // 중복 검사를 통과했다면, 새로운 Member를 추가합니다.
+      models.Teams.findOrCreate({
+        where: {
+          name: req.body.name,
+          members: req.body.members,
+          repos: req.body.repos
+        }, 
+      }).spread((user, created) => {
+        console.log("[+] /team/add : 새로운 팀이 추가되었습니다 : \n", user.get({plain: true}));
+        res.json({
+          result: 0,
+          member: user.get({plain: true})
+        });
+      });
+    }
+  });
+});
+
 module.exports = router;
