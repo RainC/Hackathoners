@@ -148,7 +148,12 @@ const Commit = sequelize.define('Commit', {
   },
   reponame: {
     type: Sequelize.STRING(40)
+  },
+  teamname: {
+    type: Sequelize.INTEGER(11)
   }
+}, {
+  timestamps: false
 });
 
 Hackathoners.db.sequelize = sequelize;

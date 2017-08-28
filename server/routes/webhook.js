@@ -27,6 +27,8 @@ router.post('/', function(req, res, next) {
    * "name", "email"을 포함하는 JSON Object입니다.
    */
   var result = {
+    // 성공을 뜻하는 상수값입니다.
+    result: 0,
     // Repository 관련 내용입니다.
     repo: {
       // Repository의 이름입니다.
@@ -50,12 +52,47 @@ router.post('/', function(req, res, next) {
     }
   }
 
+  var teamname = undefined;
+  models.Members.findOne({ where: {github: payload.head_commit.committer.username}}).then(result => {
+    if (result) {
+      teamname = result.group;
+    } else {
+      res.json({
+        result: 1,
+        error_desc: "해당 Commit을 발생시킨 유저가 DB에 존재하지 않습니다."
+      });
+    }
+  });
+
   var options = {
     url: "https://api.github.com/repos/" + payload.repository.full_name,
     headers: {
       'User-Agent': 'request'
     }
   };
+
+  payload.commits.forEach(function(value, index, array) {
+    models.Commits.findOne({ where: {sha: value.id} }).then(result => {
+      if (result) {
+        res.json({
+          result: 2,
+          error_desc: "이미 존재하는 Commit 해쉬 값입니다."
+        });
+      } else {
+        models.Commits.findOrCreate({
+          where: {
+            sha: value.id,
+            committer: value.author.username,
+            timestamp: value.timestamp,
+            reponame: payload.repository.name,
+            teamname: teamname
+          }, 
+        }).spread((user, created) => {
+          console.log("[+] /webhook : 새로운 Commit을 등록했습니다. : \n", user.get({plain: true}));
+        });
+      }
+    });
+  });
 
   request(options, function(error, response, body) {
     result.commit.full_count = JSON.parse(response.body).size;

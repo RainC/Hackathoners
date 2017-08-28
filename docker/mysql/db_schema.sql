@@ -34,5 +34,6 @@ CREATE TABLE `Commits` (
     `committer` varchar(40) DEFAULT NULL,
     `timestamp` varchar(25) DEFAULT NULL,
     `reponame` varchar(40) DEFAULT NULL,
+    `teamname` int(11) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
