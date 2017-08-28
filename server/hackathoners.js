@@ -11,7 +11,7 @@ var Hackathoners = {
             // 위의 사용자 이름에 대한 비밀번호입니다.
             password: "",
             // DB 서버의 주소입니다. (포트를 제외하고 입력합니다.)
-            host: "127.0.0.1",
+            host: "172.16.0.3",
             // 접속 대상 포트입니다. 기본값으로 3306번이 설정됩니다.
             port: "3306"
         }
@@ -24,7 +24,8 @@ var Hackathoners = {
         model: {
             Teams: undefined,
             Members: undefined,
-            Repositories: undefined
+            Repositories: undefined,
+            Commits: undefined
         }
     },
     // Socket.io 공유 객체 정의 집합
@@ -129,9 +130,31 @@ const Repository = sequelize.define('Repository', {
   timestamps: false
 });
 
+const Commit = sequelize.define('Commit', {
+  id: {
+    type: Sequelize.INTEGER(11).UNSIGNED,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
+  },
+  sha: {
+    type: Sequelize.STRING(40)
+  },
+  committer: {
+    type: Sequelize.STRING(40)
+  },
+  timestamp: {
+    type: Sequelize.STRING(25)
+  },
+  reponame: {
+    type: Sequelize.STRING(40)
+  }
+});
+
 Hackathoners.db.sequelize = sequelize;
 Hackathoners.db.model.Teams = Team;
 Hackathoners.db.model.Members = Member;
 Hackathoners.db.model.Repositories = Repository;
+Hackathoners.db.model.Commits = Commit;
 
 module.exports = Hackathoners;
