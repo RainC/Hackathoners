@@ -81,7 +81,7 @@ function printScheduleTime(now) {
     nowTime = "Day " + Math.ceil(betweenDay);
     clock.innerHTML = nowTime;
 }
-length
+
 function printScheduleSequence() {
     var checkNextTime = checkNextSchedule();
     if (checkNextTime.result == true) {
