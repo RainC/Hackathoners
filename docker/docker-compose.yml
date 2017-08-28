@@ -7,6 +7,9 @@ services:
             - 80:8080
         links:
             - hacka_mysql
+        networks:
+            hacka-network:
+                ipv4_address: 172.16.0.2
 
     hacka_mysql:
         build: ./mysql
@@ -19,5 +22,17 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
             # If needed, uncomment next line and append new appropriate password.
             # MYSQL_ROOT_PASSWORD: SAMPLE
+        networks:
+            hacka-network:
+                ipv4_address: 172.16.0.3
+
 volumes:
     hacka_db:
+
+networks:
+  hacka-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.0.0/16
