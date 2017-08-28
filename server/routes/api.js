@@ -60,7 +60,7 @@ router.post('/repo/add', function(req, res, next) {
         error_desc: "이미 존재하는 Repository 이름입니다."
       });
     } else {
-      // 중복 검사를 통과했다면, 새로운 Member를 추가합니다.
+      // 중복 검사를 통과했다면, 새로운 Repository를 추가합니다.
       models.Repositories.findOrCreate({
         where: {
           username: req.body.username,
@@ -91,7 +91,7 @@ router.post('/team/add', function(req, res, next) {
         error_desc: "이미 존재하는 팀 이름입니다."
       });
     } else {
-      // 중복 검사를 통과했다면, 새로운 Member를 추가합니다.
+      // 중복 검사를 통과했다면, 새로운 Team를 추가합니다.
       models.Teams.findOrCreate({
         where: {
           name: req.body.name,
