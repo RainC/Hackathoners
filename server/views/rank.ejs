@@ -163,7 +163,14 @@ window.onload = function() {
 }
 
 function printCustomTime(now) {
-
+    $.get("api/rank", function(data) {
+        for (var i = 0; i < data.length; i++) {
+            document.getElementById("RankTeamName-order" + i).innerHTML = 
+                '<a>' + data[i].name + '</a>';
+            document.getElementById("RankScore-order" + i).innerHTML = 
+                '<a>' + '총 ' + data[i].amount + ' 회, CPH ' + data[i].cph + '회' + '</a>';
+        }
+    });
 }
 
 </script>
@@ -176,12 +183,6 @@ function printCustomTime(now) {
         console.log(data);
         // data type [{name: 'string', amount: 'int', cph: 'int'}, ...]
         // data size 6
-        for (var i = 0; i < data.length; i++) {
-            document.getElementById("RankTeamName-order" + i).innerHTML = 
-                '<a>' + data[i].name + '</a>';
-            document.getElementById("RankScore-order" + i).innerHTML = 
-                '<a>' + '총 ' + data[i].amount + ' 회, CPH ' + data[i].cph + '회' + '</a>';
-        }
 
     });
 
