@@ -3,6 +3,7 @@ var router = express.Router();
 
 var hackathoners = require('../hackathoners');
 var models = hackathoners.db.model;
+var socket = hackathoners.socket;
 
 /**
  * 서버 상태를 확인합니다.
@@ -109,4 +110,44 @@ router.post('/team/add', function(req, res, next) {
   });
 });
 
+/**
+ * 전광판에 Rank 정보를 보냅니다.
+ */
+router.get("/rank", function(req, res, next) {
+  var result = [
+    {
+      name: "LecRec", 
+      amount: 35, 
+      cph: 5
+    },
+    {
+      name: "국민택시",
+      amount: 28,
+      cph: 4
+    },
+    {
+      name: "국고나라 사기꾼",
+      amount: 25,
+      cph: 3
+    },
+    {
+      name: "돌려방",
+      amount: 22,
+      cph: 3
+    },
+    {
+      name: "WorkHard",
+      amount: 16,
+      cph: 2
+    },
+    {
+      name: "TDD Hub",
+      amount: 10,
+      cph: 4
+    }
+  ];
+
+  res.status(200);
+  res.json(result);
+});
 module.exports = router;
