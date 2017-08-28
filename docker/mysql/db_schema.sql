@@ -27,3 +27,12 @@ CREATE TABLE `Repositories` (
     `commits` int(3) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `Commits` (
+    `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `sha` varchar(40) DEFAULT NULL,
+    `committer` varchar(40) DEFAULT NULL,
+    `timestamp` varchar(25) DEFAULT NULL,
+    `reponame` varchar(40) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
