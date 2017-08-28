@@ -31,7 +31,8 @@ var schedule = [
     {start: 60, end: 61.5, content: '점심 식사(?) 및 휴식'},
     {start: 61.5, end: 63.5, content: '팀별최종발표평가'},
     {start: 63.5, end: 64, content: '우수작시상,사진촬영,폐회'},
-    {start: 64, end: 72, content: '집가라'}
+    {start: 64, end: 72, content: '집가라'},
+    {start: 72, end: 96, content: '종료'}
 
 ];
 
@@ -42,6 +43,7 @@ function checkNextSchedule() {
     var nextTime = schedule[currentScheduleIndex].end;
     if (now - STARTDATE > nextTime * 60 * 60 * 1000) {
         currentScheduleIndex++;
+
         return {result: true,
              listSchedule: schedule.slice(currentScheduleIndex - 1, currentScheduleIndex + 2)};
     }
@@ -81,8 +83,9 @@ function printScheduleTime(now) {
 }
 
 function printScheduleSequence() {
-    if (checkNextSchedule().result == true) {
-        var arraySchedule = checkNextSchedule().listSchedule;
+    var checkNextTime = checkNextSchedule();
+    if (checkNextTime.result == true) {
+        var arraySchedule = checkNextTime.listSchedule;
 
         var tmpTimeStart;
         var tmpTimeEnd;
