@@ -46,7 +46,7 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <canvas id = "canvas"></canvas>
+  <canvas id="canvas"></canvas>
 </body>
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
@@ -62,7 +62,7 @@
     enqueue('content', 'type', 'time');
   });
   
-  var ip = "127.0.0.1";
+  var ip = window.location.hostname;
   var port = "80"
   var addr = "http://" + ip + ":" + port;
 
