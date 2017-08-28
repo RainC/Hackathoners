@@ -3,7 +3,8 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <script src="scripts/custom_time.js"></script>
+    <script src="scripts/schedule_config.js"></script>
     <style>
 
     @import url(https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
@@ -39,20 +40,23 @@
     <div id="wrapper">
         <img
             id="img_date"
-            src="./public/resources/schedule.png"
-            style="position: absolute; left: 0%; top: 0%; height: 100%; z-index: 2;">
+            src="./resources/schedule.png"
+            style="position: absolute; left: 0%; top: 0%; height: 100%; z-index: 2;" />
 
-        <div class="box"><a>2017년 03월 19일_일요일</a></div>
-        <div class="box"><a>PM</a></div>
-        <div class="box"><a>04시 11분</a></div>
-        <div class="box"><a>day 1</a></div>
-        <div class="box" style="font-weight: 500"><a>2017년 3월 19일 일요일_오후 04시 37분</a></div>
-        <div class="box"><a>오후 개발 진행</a></div>
-        <div class="box" style="font-weight: 500"><a>오후 12시 00분 ~ 오후 01시 30분</a></div>
-        <div class="box"><a>2차 발표</a></div>
-        <div class="box" style="font-weight: 500"><a>오후 12시 00분 ~ 오후 01시 30분</a></div>
-        <div class="box"><a>오후 개발 진행</a></div>
-        <div class="box" style="font-weight: 500"><a>오후 12시 00분 ~ 오후 01시 30분</a></div>
+        <!-- Time -->
+        <div class="box" id="Date-timer"><a>2017년 03월 19일_일요일</a></div>
+        <div class="box" id="AMPM-timer"><a>PM</a></div>
+        <div class="box" id="HourMinute-timer"><a>04시 11분</a></div>
+        <div class="box" id="Day-timer" ><a>day 1</a></div>
+        <div class="box" id="mini-timer" style="font-weight: 500"><a>2017년 3월 19일 일요일_오후 04시 37분</a></div>
+
+        <!-- Schedule -->
+        <div class="box" id="ScheduleTitle-order0"><a>오후 개발 진행</a></div>
+        <div class="box" id="ScheduleTime-order0" style="font-weight: 500"><a>오후 12시 00분 ~ 오후 01시 30분</a></div>
+        <div class="box" id="ScheduleTitle-order1"><a>2차 발표</a></div>
+        <div class="box" id="ScheduleTime-order1" style="font-weight: 500"><a>오후 12시 00분 ~ 오후 01시 30분</a></div>
+        <div class="box" id="ScheduleTitle-order2"><a>오후 개발 진행</a></div>
+        <div class="box" id="ScheduleTime-order2" style="font-weight: 500"><a>오후 12시 00분 ~ 오후 01시 30분</a></div>
 
     </div>
 </body>
@@ -141,6 +145,16 @@ function init() {
 window.addEventListener('resize', function(event){
     init();
 });
+
+window.onload = function() {
+    printMiniTime();
+    init();
+}
+
+function printCustomTime(now) {
+    printScheduleTime(now);
+    printScheduleSequence();
+}
 
 </script>
 

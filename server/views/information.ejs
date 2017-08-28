@@ -3,7 +3,7 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <script src="scripts/custom_time.js"></script>
     <style>
 
     @import url(https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
@@ -39,10 +39,10 @@
     <div id="wrapper">
         <img
             id="img_information"
-            src="./public/resources/information.png"
+            src="./resources/information.png"
             style="position: absolute; left: 0%; top: 0%; height: 100%; z-index: 2;">
 
-        <div class="box" style="font-weight: 500"><a>2017년 3월 19일 일요일_오후 04시 37분</a></div>
+        <div class="box" id="mini-timer" style="font-weight: 500"><a>2017년 3월 19일 일요일_오후 04시 37분</a></div>
         <div class="wrapper-md"></div>
     </div>
 </body>
@@ -104,6 +104,15 @@ function init() {
 window.addEventListener('resize', function(event){
     init();
 });
+
+window.onload = function() {
+    printMiniTime();
+    init();
+}
+
+function printCustomTime(now) {
+    // Not Implement Error   
+}
 
 </script>
 

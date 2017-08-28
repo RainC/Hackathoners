@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
+  <title>오픈소스 해커톤</title>
 
   <!-- bootstrap css -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,31 +12,27 @@
   <link rel='stylesheet' href='stylesheets/config.css' />
   <link rel='stylesheet' href='stylesheets/index.css' />
 
+  <!-- js -->
+  <script src="scripts/canvas.js"></script>
+  <script src="scripts/notice_queue.js"></script>
+
 </head>
 <body>
-
+  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
     <!--Contents -->
     <div class="carousel-inner">
-      <div class="item active" style="background: #FF0000;">
-
+      <div class="item active">
+        <iframe class="frame-fit" id="frame-schedule"></iframe>
       </div>
 
-      <div class="item" style="background: #00FF00;">
-
+      <div class="item">
+        <iframe class="frame-fit" id="frame-rank"></iframe>
       </div>
 
-      <div class="item" style="background: #0000FF;">
-
-      </div>
-
-      <div class="item" style="background: #FFFF00;">
-
-      </div>
-
-      <div class="item" style="background: #00FFFF;">
-
+      <div class="item">
+        <iframe class="frame-fit" id="frame-information"></iframe>
       </div>
     </div>
 
@@ -50,21 +46,40 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
+  <canvas id = "canvas"></canvas>
 </body>
 
-<script>
-  $('.carousel').carousel({
-    interval: 500,
-    pause: "false"
-  });
-</script>
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script>
+
   var socket = io();
+  /*
   socket.on('new_commit', function(data) {
-      console.log(data);
+    console.log(data);
   });
+
+  socket.on('broadcast', function(data) {
+    enqueue('content', 'type', 'time');
+  });
+*/
+  var ip = "172.19.0.1";
+  var port = "80"
+  var addr = "http://" + ip + ":" + port;
+
+  var listFrame = ['schedule', 'rank', 'information'];
+
+  $( '.frame-fit' ).each(function ( i, frame ) {
+    $( frame ).attr('src', addr + "/" + listFrame[i]);
+  });
+
+  $('.carousel').carousel({
+    interval: 10000,
+    pause: "false"
+  });
+
+  function checkRank() {
+    socket.emit('rank');
+  }
 </script>
 
 </html>

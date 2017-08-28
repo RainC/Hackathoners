@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <script src="scripts/custom_time.js"></script>
     <style>
 
     @import url(https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
@@ -39,29 +38,29 @@
     <div id="wrapper">
         <img
             id="img_rank"
-            src="./public/resources/rank.png"
+            src="./resources/rank.png"
             style="position: absolute; left: 0%; top: 0%; height: 100%; z-index: 2;">
 
         <!-- mini timer -->
-        <div class="box" style="font-weight: 500"><a>2017년 3월 19일 일요일_오후 04시 37분</a></div>
+        <div class="box" id="mini-timer" style="font-weight: 500"><a>2017년 3월 19일 일요일_오후 04시 37분</a></div>
         <!-- rank - 1 -->
-        <div class="box"><a>LecRec</a></div>
-        <div class="box"><a>총 35회, CPH 5회</a></div>
+        <div class="box" id="RankTeamName-order0"><a>LecRec</a></div>
+        <div class="box" id="RankScore-order0"><a>총 35회, CPH 5회</a></div>
         <!-- rank - 2 -->
-        <div class="box"><a>국민택시</a></div>
-        <div class="box"><a>총 28회, CPH 4회</a></div>
+        <div class="box" id="RankTeamName-order1"><a>국민택시</a></div>
+        <div class="box" id="RankScore-order1"><a>총 28회, CPH 4회</a></div>
         <!-- rank - 3 -->
-        <div class="box"><a>국고나라 사기꾼</a></div>
-        <div class="box"><a>총 25회, CPH 3회</a></div>
+        <div class="box" id="RankTeamName-order2"><a>국고나라 사기꾼</a></div>
+        <div class="box" id="RankScore-order2"><a>총 25회, CPH 3회</a></div>
         <!-- rank - 4 -->
-        <div class="box"><a>돌려방</a></div>
-        <div class="box"><a>총 22회, CPH 3회</a></div>
+        <div class="box" id="RankTeamName-order3"><a>돌려방</a></div>
+        <div class="box" id="RankScore-order3"><a>총 22회, CPH 3회</a></div>
         <!-- rank - 5 -->
-        <div class="box"><a>WorkHard</a></div>
-        <div class="box"><a>총 16회, CPH 2회</a></div>
+        <div class="box" id="RankTeamName-order4"><a>WorkHard</a></div>
+        <div class="box" id="RankScore-order4"><a>총 16회, CPH 2회</a></div>
         <!-- rank - 6 -->
-        <div class="box"><a>TDD Hub</a></div>
-        <div class="box"><a>총 10회, CPH 4회</a></div>
+        <div class="box" id="RankTeamName-order5"><a>TDD Hub</a></div>
+        <div class="box" id="RankScore-order5"><a>총 10회, CPH 4회</a></div>
 
 
     </div>
@@ -93,7 +92,7 @@ var div_box_ltwh = [
     [0.4680, 0.7694 + rank456_tab, 0.3125, 0.0305, 'ver'],
     // 6 등
     [0.7000, 0.7294 + rank456_tab, 0.3125, 0.0305, 'ver'],
-    [0.7000, 0.7694 + rank456_tab, 0.3125, 0.0305, 'ver'],
+    [0.7000, 0.7694 + rank456_tab, 0.3125, 0.0305, 'ver']
 ];
 
 function init() {
@@ -157,6 +156,35 @@ function init() {
 window.addEventListener('resize', function(event){
     init();
 });
+
+window.onload = function() {
+    printMiniTime();
+    init();
+}
+
+function printCustomTime(now) {
+
+}
+
+</script>
+
+<script>
+    
+    var socket = parent.socket;
+    socket.on('rank', function(data) {
+        alert(data);
+        console.log(data);
+        // data type [{name: 'string', amount: 'int', cph: 'int'}, ...]
+        // data size 6
+        for (var i = 0; i < data.length; i++) {
+            document.getElementById("RankTeamName-order" + i).innerHTML = 
+                '<a>' + data[i].name + '</a>';
+            document.getElementById("RankScore-order" + i).innerHTML = 
+                '<a>' + '총 ' + data[i].amount + ' 회, CPH ' + data[i].cph + '회' + '</a>';
+        }
+
+    });
+
 
 </script>
 
