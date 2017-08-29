@@ -16,7 +16,7 @@ CREATE TABLE `Members` (
     `phone` varchar(11) DEFAULT NULL,
     `email` varchar(40) DEFAULT NULL,
     `github` varchar(40) DEFAULT NULL,
-    `group` varchar(40) DEFAULT NULL,
+    `groupname` varchar(40) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -34,6 +34,6 @@ CREATE TABLE `Commits` (
     `committer` varchar(40) DEFAULT NULL,
     `timestamp` varchar(25) DEFAULT NULL,
     `reponame` varchar(40) DEFAULT NULL,
-    `teamname` int(11) DEFAULT NULL,
+    `teamname` varchar(30) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
