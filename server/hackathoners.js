@@ -103,7 +103,7 @@ const Member = sequelize.define('Member', {
   github: {
     type: Sequelize.STRING(40)
   },
-  group: {
+  groupname: {
     type: Sequelize.STRING(40)
   }
 }, {
@@ -150,7 +150,7 @@ const Commit = sequelize.define('Commit', {
     type: Sequelize.STRING(40)
   },
   teamname: {
-    type: Sequelize.INTEGER(11)
+    type: Sequelize.STRING(40)
   }
 }, {
   timestamps: false

@@ -35,7 +35,7 @@ router.post('/member/add', function(req, res, next) {
           phone: req.body.phone,
           email: req.body.email,
           github: req.body.github,
-          group: req.body.group
+          groupname: req.body.groupname
         }, 
       }).spread((user, created) => {
         console.log("[+] /member/add : 새로운 멤버가 추가되었습니다 : \n", user.get({plain: true}));
@@ -47,7 +47,6 @@ router.post('/member/add', function(req, res, next) {
     }
   });
 });
-
 
 /**
  * Repository를 추가합니다.
@@ -114,10 +113,10 @@ router.post('/team/add', function(req, res, next) {
  * 전광판에 Rank 정보를 보냅니다.
  */
 router.get("/rank", function(req, res, next) {
-  var result = [
+  var result_sample = [
     {
       name: "LecRec", 
-      amount: 35, 
+      amount: 35,
       cph: 5
     },
     {
@@ -147,7 +146,26 @@ router.get("/rank", function(req, res, next) {
     }
   ];
 
-  res.status(200);
-  res.json(result);
+  var result = [];
+  models.Teams.all().then(teams => {
+    result = teams.map((v) => ({name: v.name, amount: 0, cph: 0}));
+  }).then(() => {
+    models.Commits.all().then(commits => {
+      commits.forEach((value, index, array) => {
+        result.forEach((v, i, a) => {
+          if (value.teamname == v.name) {
+            result[i].amount += 1;
+            var hours = (new Date(value.timestamp).getTime() - new Date().getTime()) / (1000 * 60 * 60);
+            console.log("[+] " + Math.abs(Math.floor(hours)) + "의 시간차가 있습니다.");
+            if (Math.abs(hours) <= 2) {
+              result[i].cph += 1;
+            }
+          }
+        });
+      });
+      res.status(200);
+      res.json(result);
+    });
+  });
 });
 module.exports = router;
