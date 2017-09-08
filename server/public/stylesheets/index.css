@@ -11,3 +11,23 @@
   margin: 0;
   padding: 0;
 }
+
+
+#div-blind {
+  transition: opacity 1s;
+}
+
+#div-notice-back {
+  margin: 0 auto;
+  width: 0;
+  height: 100%;
+}
+
+.box-notice {
+  font-family:  'Spoqa Han Sans', 'Spoqa Han Sans KR', 'Sans-serif';
+  position: absolute;
+  z-index: 2;
+  color: #FFCCF8;
+  font-weight: 100;
+  transition: opacity 3s;
+}
