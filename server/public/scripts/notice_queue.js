@@ -31,5 +31,5 @@ function doTask() {
     setTimeout("doTask()", 5000);
     var obj = dequeue();
     state = 1;
-    drawFire();
+    notice(obj.content, obj.time);
 }
